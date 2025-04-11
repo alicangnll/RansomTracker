@@ -1,0 +1,10 @@
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+jsonschema
+requests
+tqdm
+stem
+Pillow
+selenium
+pytest-playwright

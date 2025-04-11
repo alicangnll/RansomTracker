@@ -1,0 +1,19 @@
+<h2>Welcome to ThreadLive</h2>
+
+<p>
+    ThreadLive web sitesi, açık kaynaklardan topladığı verilere göre yetkisiz erişim, ransomware vb saldırıya uğrayan kurumları kaydeden bir web sitesidir. 
+    Açık kaynaklardan beslenen bir web sitesi olduğu için hata olasılığı bulunmaktadır. Sistemlerinizi ayrıca kontrol etmeniz önemle rica olunur.
+</p>
+
+<table>
+    <thead>
+        <th>Aktör Adı</th>
+        <th></th>
+    </thead>
+    <tbody>
+        {% for groups in hacked_list %}
+        <td>{{groups["name"]}}</td>
+        <td></td>
+        {%endfor%}
+    </tbody>
+</table>
