@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-
+from datetime import datetime
 db = SQLAlchemy()
 
 class Group(db.Model):
@@ -27,3 +27,32 @@ class Post(db.Model):
     website = db.Column(db.String)
     duplicates = db.Column(db.Text)
     screenshot = db.Column(db.Text)
+
+class Wallet(db.Model):
+    __tablename__ = 'wallets'
+    id = db.Column(db.Integer, primary_key=True)
+    address = db.Column(db.String(100), unique=True, nullable=False)
+    balance = db.Column(db.BigInteger, nullable=False)
+    balance_usd = db.Column(db.Float, nullable=False)
+    blockchain = db.Column(db.String(50), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=False)
+    family = db.Column(db.String(100), nullable=True)
+    transactions = db.relationship('Transaction', backref='wallet', lazy=True, cascade="all, delete-orphan")
+
+class Transaction(db.Model):
+    __tablename__ = 'transactions'
+    id = db.Column(db.Integer, primary_key=True)
+    wallet_id = db.Column(db.Integer, db.ForeignKey('wallets.id'), nullable=False)
+    hash = db.Column(db.String(100), nullable=False)
+    time = db.Column(db.BigInteger, nullable=False)  # Unix timestamp
+    amount = db.Column(db.BigInteger, nullable=False)
+    amount_usd = db.Column(db.Float, nullable=False)
+
+class KriptoDegisim(db.Model):
+    __tablename__ = 'kripto_degisim'
+    id = db.Column(db.Integer, primary_key=True)
+    tarih = db.Column(db.DateTime, default=datetime.utcnow)
+    cuzdanno = db.Column(db.String(100), nullable=False)
+    degismeden_once = db.Column(db.BigInteger, nullable=False)
+    degisimden_sonra = db.Column(db.BigInteger, nullable=False)
